@@ -1,6 +1,4 @@
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 });
-
 
 export class ComunicationService {
 
@@ -30,7 +28,7 @@ export class ComunicationService {
         ws.send(message);
     }
 
-    sendJson( aJson ) {
+    export sendJson( aJson ) {
         ws.send(JSON.stringify(aJson));
     }
 
