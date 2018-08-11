@@ -6,6 +6,9 @@ const app = express();
 var server = require('http').createServer(app);
 
 
+import { Device } from "./device";
+let device = new Device('eSolar', '8080');
+
 
 app.set('portChat',process.env.PORT || 3000);
 

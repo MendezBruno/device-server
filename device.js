@@ -1,14 +1,17 @@
-import  * as Operation from './operation';
-import * as Comunication from './comunication';
+import  { Operation } from './operation';
+import { ComunicationService } from './comunication';
+
 
 
 export class Device {
 
     hilo;
+
+
     
     constructor(name, port) {
         this.name = name;
-        this.comunication = new Comunication.ComunicationService(port);
+        this.comunication = new ComunicationService(port);
     }
     
     ejecutor(parameter) {
@@ -25,12 +28,16 @@ export class Device {
         clearInterval(this.hilo);
     }
 
+    automatic() {}
+
+    manual() {}
+
+    // enum
+    Command = {
+        'Start' : this.start,
+        'Stop' : this.stop,
+        'Automatic' : this.automatic,
+        'Manual' : this.manual
+    }
 }
 
-
-var Command = {
-    'Start' : start(),
-    'Stop' : stop(),
-    'Automatic' : automatic(),
-    'Manual' : manual()
-}
