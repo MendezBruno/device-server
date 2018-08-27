@@ -1,16 +1,31 @@
+
 const WebSocket = require('ws');
 
 var ws;
 export class ComunicationService {
 
     ws;
-    constructor(port) {
+    /*constructor(port, device) {
+        this.device = device;
         const wss = new WebSocket.Server({ port: port });
         wss.on('connection', function connection(ws) {
             this.ws = ws;
             console.log('user conected')
-            this.setEvent(this.eventNames.MENSSAGE, function incoming(message) {
+            ws.setEvent(this.eventNames.MENSSAGE, function incoming(message) {
                 console.log('received: %s', message);
+                this.action(message);
+            });
+        });
+    }*/
+
+    constructor(port, device) {
+        const wss = new WebSocket.Server({ port: port });
+        wss.on('connection', (ws) => {
+            this.ws = ws;
+            console.log('user conected')
+            ws.on('message', function incoming(message) {
+                console.log('received: %s', message);
+                device.ejecutor(message);
             });
         });
     }
@@ -36,11 +51,12 @@ export class ComunicationService {
     
 
      /**
-     * envia en formato string un mensaje, la idea es que sea un JSON stringify
-     * @param {JSON} aJson 
+     * envia en JSON string un mensaje
+     * @param {string} message 
      */
-    sendJson( aJson ) {
-        ws.send(JSON.stringify(aJson));
+    sendJson( message ) {
+        console.log('enviado: %s', JSON.stringify(message));
+        this.ws.send(JSON.stringify(message));
     }
 
     nameEvent = {

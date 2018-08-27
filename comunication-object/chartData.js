@@ -1,45 +1,26 @@
-export default class Point {
-    constructor(x,y) {
-      this.x = x;
-      this.y = y;
-    }
-}
-
-export class GenericDatasetPoints {
-    
-    
-    constructor (dataset) {
-        this.dataset = dataset;
-    }
- 
-    getXValues(){
-      let result = [];
-      this.dataset.forEach(element => {
-        result.push(element.x);
-      });
-      return result;
-  }
-
-  getValues(){
-    return this.dataset;
-  }
-}
-
+import { Punto } from "./point";
 
 export class ChartData {
 
-   // chartName: string;
-   // points: Point[];
+    chartName;
+    points;
 
-   /**
+    /**
     * @param {string} chartName 
     * @param {Array of Point} points 
     */
-    constructor(chartName, points) {
+    constructor(chartName,points) {
         this.chartName = chartName;
         this.points = points;
     }
 
+    addPoint(x, y){
+        if(this.points === undefined || this.points === null){
+            this.points = [];
+        }
+        this.points.push(new Punto(x, y));
+    }
+    
     /**
      * metodo de obtencion de valores de abscisas
      * @returns Array de numbers
@@ -52,7 +33,7 @@ export class ChartData {
         return result; 
     }
 
-     /**
+    /**
      * metodo de obtencion de valores de ordenadas
      * @returns Array de numbers
      */
