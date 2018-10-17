@@ -17,6 +17,15 @@ export class Device {
         this.comunication = new ComunicationService(port, this);
         this.operation = new Operation();
     }
+
+    ejecutar(commandToLine){
+        if(commandToLine == 'test'){
+            let fieldData = new FieldData('tc', this.operation.getRandomInt(2, 233).toString());
+            let fieldDataToSend = new ComunicationObject();
+            fieldDataToSend.setField(fieldData);
+            this.comunication.sendJson(fieldDataToSend);
+        }
+    }
     
     ejecutor(comunicationObject) {
         let comunicationObjectReal = new ComunicationObject();

@@ -20,9 +20,17 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-
-
-
 server.listen(app.get('portChat'), () => {
 	console.log('server on port ', app.get('portChat'));
+});
+
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+  
+  readline.question('Preparando entrada de comandos' + '\n', (name) => {
+    console.log(`Comando Ingresado: ${name}`);
+    device.ejecutar(name);
+    //readline.close()
 });
