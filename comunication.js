@@ -1,14 +1,32 @@
+
 const WebSocket = require('ws');
 
+var ws;
 export class ComunicationService {
 
-    constructor(port) {
+    ws;
+    /*constructor(port, device) {
+        this.device = device;
         const wss = new WebSocket.Server({ port: port });
         wss.on('connection', function connection(ws) {
+            this.ws = ws;
             console.log('user conected')
+            ws.setEvent(this.eventNames.MENSSAGE, function incoming(message) {
+                console.log('received: %s', message);
+                this.action(message);
+            });
         });
-        this.setEvent('message' , function incoming(message) {
-            console.log('received: %s', message);
+    }*/
+
+    constructor(port, device) {
+        const wss = new WebSocket.Server({ port: port });
+        wss.on('connection', (ws) => {
+            this.ws = ws;
+            console.log('user conected')
+            ws.on('message', function incoming(message) {
+                console.log('received: %s', message);
+                device.ejecutor(message);
+            });
         });
     }
 
@@ -18,18 +36,34 @@ export class ComunicationService {
      * @param {function} functionEvent la funcion que va a ejecutar el evento
      */
     setEvent(nameEvent, functionEvent) {
-        ws.on(nameEvent, functionEvent);
+        ws.on(nameEvent[nameEvent], functionEvent);
     }
     /**
-     * envia en formato string un mensaje, la idea es que sea un JSON stringify
+     * envia en formato string un mensaje
      * @param {string} message 
      */
     send(message) {
-        ws.send(message);
+        ws.send(message, function ack(error) {
+            console.error( error );
+        })
+    }
+        
+    
+
+     /**
+     * envia en JSON string un mensaje
+     * @param {string} message 
+     */
+    sendJson( message ) {
+        console.log('enviado: %s', JSON.stringify(message));
+        this.ws.send(JSON.stringify(message));
     }
 
-    export sendJson( aJson ) {
-        ws.send(JSON.stringify(aJson));
+    nameEvent = {
+        CONECTION : 'connection',
+        MENSSAGE : 'message',
+        CLOSE : 'close',
+        OPEN : 'open',
     }
 
 }
