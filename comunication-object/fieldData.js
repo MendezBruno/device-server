@@ -1,11 +1,13 @@
 export class FieldData {
 
-    fieldName;
-    fieldValue;
+    t;
+    fn;
+    fv;
     
     constructor(fieldName,fieldValue) {
-        this.fieldName = fieldName;
-        this.fieldValue = fieldValue;
+        this.fn = fieldName;
+        this.fv = fieldValue;
+        this.t = "FD";
     }
     
     getValueAsNumber(){

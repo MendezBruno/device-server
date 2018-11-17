@@ -2,23 +2,25 @@ import { Punto } from "./point";
 
 export class ChartData {
 
-    chartName;
-    points;
+    t;
+    cn;
+    p;
 
     /**
     * @param {string} chartName 
     * @param {Array of Point} points 
     */
     constructor(chartName,points) {
-        this.chartName = chartName;
-        this.points = points;
+        this.cn = chartName;
+        this.p = points;
+        this.t = "CD";
     }
 
     addPoint(x, y){
-        if(this.points === undefined || this.points === null){
-            this.points = [];
+        if(this.p === undefined || this.p === null){
+            this.p = [];
         }
-        this.points.push(new Punto(x, y));
+        this.p.push([x, y]);
     }
     
     /**
@@ -27,8 +29,8 @@ export class ChartData {
      */
     getXValues(){
         let result = [];
-        this.points.forEach(element => {
-            result.push(element.x);
+        this.p.forEach(element => {
+            result.push(element[0]);
         });
         return result; 
     }
@@ -39,8 +41,8 @@ export class ChartData {
      */
     getYValues(){
         let result = [];
-        this.points.forEach(element => {
-            result.push(element.y);
+        this.p.forEach(element => {
+            p.push(element[1]);
         });
         return result;
     }
@@ -50,6 +52,6 @@ export class ChartData {
      * @returns Array de puntos
      */
     getValues(){
-        return this.points;
+        return this.p;
     }
 }
