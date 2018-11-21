@@ -1,4 +1,5 @@
 import { Punto } from "./point";
+import { runInThisContext } from "vm";
 
 export class ChartData {
 
@@ -16,11 +17,43 @@ export class ChartData {
         this.t = "CD";
     }
 
-    addPoint(x, y){
+    checkIfPointsAreAreated(){
         if(this.p === undefined || this.p === null){
             this.p = [];
         }
+    }
+
+    addPoint(x, y){
+        this.checkIfPointsAreAreated();
         this.p.push([x, y]);
+    }
+
+    addXPoint(pointsX){
+        this.checkIfPointsAreAreated();
+
+        for(let i = 0; i < pointsX.length; i++){
+            if (this.p[i] === undefined || this.p[i] === null){
+                this.p[i] = [pointsX[i], null];
+            }
+            else{
+                //Porque solo queremos actualizar el valor de X
+                this.p[i][0] = pointsX[i];
+            }
+        }
+    }
+
+    addYPoint(pointsY){
+        this.checkIfPointsAreAreated();
+
+        for(let i = 0; i < pointsY.length; i++){
+            if (this.p[i] === undefined || this.p[i] === null){
+                this.p[i] = [null, pointsY[i]];
+            }
+            else{
+                //Porque solo queremos actualizar el valor de Y
+                this.p[i][1] = pointsY[i];
+            }
+        }
     }
     
     /**

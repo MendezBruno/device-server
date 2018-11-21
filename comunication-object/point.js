@@ -1,3 +1,6 @@
+/**
+ * Deprecado
+ */
 export class Punto {
     x;
     y;

@@ -2,6 +2,9 @@ import { Command } from "./command";
 import { ChartData } from "./chartData";
 import { FieldData } from "./fieldData";
 
+/**
+ * Deprecado
+ */
 export class ComunicationObject {
 
     type;

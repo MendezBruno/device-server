@@ -1,3 +1,6 @@
+/**
+ * Deprecado
+ */
 export class Parameter{
     parameterName;
     parameterValue;

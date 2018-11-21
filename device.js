@@ -43,7 +43,7 @@ export class Device {
             }
             if(objectReal.cn == "updateChart2"){
                 clearInterval(this.hilo);
-                this.starChart2();
+                this.starChart2(objectReal.getParameter(0));
             }
         }
     }
@@ -68,15 +68,15 @@ export class Device {
             }, parseInt(aParameter[1]));
     }
 
-    starChart2() {
+    starChart2(aParameter) {
         //TODO. aca tenemos que armar el gráfico con los puntos del objeto ejemplo de Facundo
         this.hilo = setInterval( () => 
             {
                 //Creamos un objeto para la actualizacion del chart y lo enviamos.
                 //Por el momento no tenemos el nombre del grafico, es siempre el mismo
-                let chartData = this.operation.assembleRandomData();
+                let chartData = this.operation.graficoFacundo();
                 this.comunication.sendJson(chartData);
-            }, 2000);
+            }, parseInt(aParameter[1]));
     }
 
     stop() {
