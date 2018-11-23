@@ -3,6 +3,25 @@ import { ChartData } from './comunication-object/chartData';
 
 export class Operation {
 
+  getSinGrafics(){
+    var seno = new ChartData("SENO", []);
+    var amplitud = this.getRandomInt(1, 10);
+    for (let i=0; i<= 6.28319; i = i + 0.174533){
+        seno.addPoint(i, Math.sin(i) * amplitud);
+    }
+    return seno;
+  }
+
+  getStraightGrafics(){
+    var straight = new ChartData("Straight", []);
+    let pendiente = this.getRandomInt(-10, 10);
+    let b = this.getRandomInt(0, 100);
+    for (let i=0; i<=20; i++){
+      straight.addPoint(i, (pendiente * i) + b);
+    }
+    return straight;
+  }
+
  generatePoints () {
 
     var i;

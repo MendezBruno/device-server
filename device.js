@@ -23,6 +23,15 @@ export class Device {
             let fieldData = new FieldData('tc', this.operation.getRandomInt(2, 233).toString());
             this.comunication.sendJson(fieldData);
         }
+        if(commandToLine == 'sin'){
+            this.comunication.sendJson(this.operation.getSinGrafics());
+        }
+        if(commandToLine == 'strai'){
+            this.comunication.sendJson(this.operation.getStraightGrafics());
+        }
+        if(commandToLine == 'fac'){
+            this.comunication.sendJson(this.operation.graficoFacundo());
+        }
     }
     
     ejecutor(comunicationObject) {
