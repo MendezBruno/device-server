@@ -19,8 +19,8 @@ export class Device {
     }
 
     ejecutar(commandToLine){
-        if(commandToLine == 'test'){
-            let fieldData = new FieldData('tc', this.operation.getRandomInt(2, 233).toString());
+        if(commandToLine == 'tc'){
+            let fieldData = new FieldData('Tc', this.operation.getRandomInt(2, 233).toString());
             this.comunication.sendJson(fieldData);
         }
         if(commandToLine == 'sin'){
@@ -31,6 +31,9 @@ export class Device {
         }
         if(commandToLine == 'fac'){
             this.comunication.sendJson(this.operation.graficoFacundo());
+        }
+        if(commandToLine == 'field'){
+            this.starCompleteField();
         }
     }
     
@@ -44,6 +47,7 @@ export class Device {
             Object.assign(objectReal, comunicationObjectAux);
 
             if(objectReal.cn == "updateField"){
+                clearInterval(this.hiloField);
                 this.starField(objectReal.getParameter(0), objectReal.getParameter(1));
             }
             if(objectReal.cn == "updateChart"){
@@ -65,6 +69,19 @@ export class Device {
                 let fieldData = new FieldData(aParameter[1], this.operation.getRandomInt(2, 233).toString());
                 this.comunication.sendJson(fieldData);
             }, parseInt(aParameter2[1]));
+    }
+
+    starCompleteField(){
+        clearInterval(this.hiloField);
+        this.hiloField = setInterval( () => 
+            {
+                let fieldData = new FieldData('Tc', this.operation.getRandomInt(2, 233).toString());
+                this.comunication.sendJson(fieldData);
+                fieldData = new FieldData('Voc', this.operation.getRandomInt(2, 233).toString());
+                this.comunication.sendJson(fieldData);
+                fieldData = new FieldData('G', this.operation.getRandomInt(2, 233).toString());
+                this.comunication.sendJson(fieldData);
+            }, 300);
     }
 
     starChart(aParameter) {
