@@ -2,8 +2,6 @@ import  { Operation } from './operation';
 import { ComunicationService } from './comunication';
 import {FieldData} from './comunication-object/fieldData';
 import { Command } from './comunication-object/command';
-import {ComunicationObject} from './comunication-object/comunicationObject';
-import { ChartData } from './comunication-object/chartData'
 
 export class Device {
 
@@ -58,6 +56,22 @@ export class Device {
                 clearInterval(this.hilo);
                 this.starChart2(objectReal.getParameter(0));
             }
+            if(objectReal.cn == "updateName"){
+                //En nuestro caso, vamos a tomar el comnando actualizacion de nombre como el envio de una curva segun ese nombre.
+                this.enviarGraficoSegun(objectReal.getParameter(0)[1]);
+            }
+        }
+    }
+
+    enviarGraficoSegun(unNombre){
+        if(unNombre == 'sin'){
+            this.comunication.sendJson(this.operation.getSinGrafics());
+        }
+        if(unNombre == 'strai'){
+            this.comunication.sendJson(this.operation.getStraightGrafics());
+        }
+        if(unNombre == 'fac'){
+            this.comunication.sendJson(this.operation.graficoFacundo());
         }
     }
 
@@ -73,6 +87,7 @@ export class Device {
 
     starCompleteField(){
         clearInterval(this.hiloField);
+        var porcentaje = 100;
         this.hiloField = setInterval( () => 
             {
                 let fieldData = new FieldData('Tc', this.operation.getRandomInt(2, 233).toString());
@@ -80,6 +95,22 @@ export class Device {
                 fieldData = new FieldData('Voc', this.operation.getRandomInt(2, 233).toString());
                 this.comunication.sendJson(fieldData);
                 fieldData = new FieldData('G', this.operation.getRandomInt(2, 233).toString());
+                this.comunication.sendJson(fieldData);
+
+                //Algoritmo para actualizar las baterias.
+                fieldData = new FieldData('E1000', porcentaje);
+                this.comunication.sendJson(fieldData);
+                fieldData = new FieldData('ESens', 100 - porcentaje);
+                this.comunication.sendJson(fieldData);
+                if(porcentaje > 0){
+                    porcentaje = porcentaje - 1;
+                }
+                else{
+                    porcentaje = 100;
+                }
+
+                //Actualizamos la hora, no importa que el requerimiento pide cada 1 segundo, es solo prueba
+                fieldData = new FieldData('Hr', new Date(Date.now()));
                 this.comunication.sendJson(fieldData);
             }, 300);
     }
