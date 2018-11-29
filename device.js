@@ -114,7 +114,7 @@ export class Device {
                 }
 
                 //Actualizamos la hora, no importa que el requerimiento pide cada 1 segundo, es solo prueba
-                fieldData = new FieldData('Hr', new Date(Date.now()));
+                fieldData = new FieldData('Hr', Math.round((new Date()).getTime() / 1000));
                 this.comunication.sendJson(fieldData);
             }, 300);
     }
