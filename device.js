@@ -8,6 +8,7 @@ export class Device {
     hilo;
     hiloField;
     operation;
+    nameGrafic = "GRAFICO_X";
 
     constructor(name, port) {
         this.name = name;
@@ -44,20 +45,21 @@ export class Device {
             objectReal = new Command();
             Object.assign(objectReal, comunicationObjectAux);
 
-            if(objectReal.cn == "updateField"){
+           /* if(objectReal.cn == "updateField"){
                 clearInterval(this.hiloField);
                 this.starField(objectReal.getParameter(0), objectReal.getParameter(1));
-            }
+            }*/
             if(objectReal.cn == "updateChart"){
-                clearInterval(this.hilo);
-                this.starChart(objectReal.getParameter(0));
+                let chartData = this.operation.assembleRandomData(this.nameGrafic);
+                this.comunication.sendJson(chartData);
             }
-            if(objectReal.cn == "updateChart2"){
+          /*  if(objectReal.cn == "updateChart2"){
                 clearInterval(this.hilo);
                 this.starChart2(objectReal.getParameter(0));
-            }
+            }*/
             if(objectReal.cn == "updateName"){
-                //En nuestro caso, vamos a tomar el comnando actualizacion de nombre como el envio de una curva segun ese nombre.
+                //En nuestro caso, vamos a tomar el comnando actualizacion de nombre como el envio de una curva segun ese nombre o si no
+                //se reconoce el nombre será el cambio para el nombre de los gráficos comunes.
                 this.enviarGraficoSegun(objectReal.getParameter(0)[1]);
             }
         }
@@ -65,14 +67,16 @@ export class Device {
 
     enviarGraficoSegun(unNombre){
         if(unNombre == 'sin'){
-            this.comunication.sendJson(this.operation.getSinGrafics());
+            return this.comunication.sendJson(this.operation.getSinGrafics());
         }
         if(unNombre == 'strai'){
-            this.comunication.sendJson(this.operation.getStraightGrafics());
+            return this.comunication.sendJson(this.operation.getStraightGrafics());
         }
         if(unNombre == 'fac'){
-            this.comunication.sendJson(this.operation.graficoFacundo());
+            return this.comunication.sendJson(this.operation.graficoFacundo());
         }
+
+        this.nameGrafic = unNombre;
     }
 
     starField(aParameter, aParameter2){
@@ -115,12 +119,16 @@ export class Device {
             }, 300);
     }
 
+    /**
+     * Deprecado
+     * @param {*} aParameter 
+     */
     starChart(aParameter) {
         this.hilo = setInterval( () => 
             {
                 //Creamos un objeto para la actualizacion del chart y lo enviamos.
                 //Por el momento no tenemos el nombre del grafico, es siempre el mismo
-                let chartData = this.operation.assembleRandomData();
+                let chartData = this.operation.assembleRandomData(this.nameGrafic);
                 this.comunication.sendJson(chartData);
             }, parseInt(aParameter[1]));
     }

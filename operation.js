@@ -43,13 +43,13 @@ export class Operation {
     return value;
   }
 
-  assembleRandomData(){
+  assembleRandomData(nameGrafic){
     //No definimos 200 valores porque el grafico colapsa, hay que buscar la forma para que el grafico se vea mas grande.
     //Definimos los valores maximos posibles
     let maximumScaleInX = 100;
     var maximumValueInX = [];
     var maximumValueInY = 100;
-    let dataAssemble = new ChartData("GRAFICO_X", []);
+    let dataAssemble = new ChartData(nameGrafic, []);
 
     var scaleInX = this.getRandomInt(0, maximumScaleInX - 1);
 
@@ -67,7 +67,7 @@ export class Operation {
 
   graficoFacundo(){
 
-    let dataAssemble = new ChartData("GRAFICO_X", []);
+    let dataAssemble = new ChartData("GRAFICO_FACUNDO", []);
 
     dataAssemble.addXPoint([0.000,1.085,0.000,0.000,0.000,0.000,0.000,0.000,0.011,0.175,0.401,0.616,0.820,
                             1.034,1.247,1.469,1.682,1.889,2.098,2.311,2.532,2.746,2.952,3.163,3.379,3.596,
