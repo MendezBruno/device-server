@@ -45,18 +45,11 @@ export class Device {
             objectReal = new Command();
             Object.assign(objectReal, comunicationObjectAux);
 
-           /* if(objectReal.cn == "updateField"){
-                clearInterval(this.hiloField);
-                this.starField(objectReal.getParameter(0), objectReal.getParameter(1));
-            }*/
             if(objectReal.cn == "updateChart"){
                 let chartData = this.operation.assembleRandomData(this.nameGrafic);
                 this.comunication.sendJson(chartData);
             }
-          /*  if(objectReal.cn == "updateChart2"){
-                clearInterval(this.hilo);
-                this.starChart2(objectReal.getParameter(0));
-            }*/
+
             if(objectReal.cn == "updateName"){
                 //En nuestro caso, vamos a tomar el comnando actualizacion de nombre como el envio de una curva segun ese nombre o si no
                 //se reconoce el nombre será el cambio para el nombre de los gráficos comunes.
@@ -116,6 +109,17 @@ export class Device {
                 //Actualizamos la hora, no importa que el requerimiento pide cada 1 segundo, es solo prueba
                 fieldData = new FieldData('Hr', Math.round((new Date()).getTime() / 1000));
                 this.comunication.sendJson(fieldData);
+
+                //Actualizamos el tipo de sensor, sabemos que solo se hace una vez al iniciar, pero para prueba lo hacemos desde aca
+                let numero = this.operation.getRandomInt(0, 5);
+                if(numero >= 3){
+                    fieldData = new FieldData('Sens', "modref");
+                }
+                else{
+                    fieldData = new FieldData('Sens', "pt1000");  
+                }
+                this.comunication.sendJson(fieldData);
+
             }, 300);
     }
 
