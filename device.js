@@ -53,12 +53,13 @@ export class Device {
             if(objectReal.cn == "updateName"){
                 //En nuestro caso, vamos a tomar el comnando actualizacion de nombre como el envio de una curva segun ese nombre o si no
                 //se reconoce el nombre será el cambio para el nombre de los gráficos comunes.
-                this.enviarGraficoSegun(objectReal.getParameter(0)[1]);
+                //Tambien puede llegar un nombre de grafico correspondiente al pedido de actualizacion de campo
+                this.enviarGraficoOCampoSegun(objectReal.getParameter(0)[1]);
             }
         }
     }
 
-    enviarGraficoSegun(unNombre){
+    enviarGraficoOCampoSegun(unNombre){
         if(unNombre == 'sin'){
             return this.comunication.sendJson(this.operation.getSinGrafics());
         }
@@ -68,6 +69,50 @@ export class Device {
         if(unNombre == 'fac'){
             return this.comunication.sendJson(this.operation.graficoFacundo());
         }
+
+        let fieldData;
+        if(unNombre == 'tc'){
+            fieldData = new FieldData('Tc', this.operation.getRandomInt(2, 233).toString());
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+        if(unNombre == 'voc'){
+            fieldData = new FieldData('Voc', this.operation.getRandomInt(2, 233).toString());
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+        if(unNombre == 'g'){
+            fieldData = new FieldData('G', this.operation.getRandomInt(2, 233).toString());
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+        if(unNombre == 'e1000'){
+            fieldData = new FieldData('E1000', this.operation.getRandomInt(0, 100).toString());
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+        if(unNombre == 'esens'){
+            fieldData = new FieldData('ESens', 100 - this.operation.getRandomInt(0, 100).toString());
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+        if(unNombre == 'hr'){
+            fieldData = new FieldData('Hr', Math.round((new Date()).getTime() / 1000));
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+        if(unNombre == 'sens'){
+            let numero = this.operation.getRandomInt(0, 5);
+            if(numero >= 3){
+                fieldData = new FieldData('Sens', "modref");
+            }
+            else{
+                fieldData = new FieldData('Sens', "pt1000");  
+            }
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+
 
         this.nameGrafic = unNombre;
     }
