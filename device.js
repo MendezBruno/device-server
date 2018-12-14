@@ -70,6 +70,30 @@ export class Device {
             return this.comunication.sendJson(this.operation.graficoFacundo());
         }
 
+        if(unNombre == 'fac2'){
+            return this.comunication.sendJson(this.operation.graficoFacundo2());
+        }
+
+        if(unNombre == 'fac3'){
+            return this.comunication.sendJson(this.operation.graficoFacundo3());
+        }
+
+        if(unNombre == 'fac4'){
+            return this.comunication.sendJson(this.operation.graficoFacundo4());
+        }
+
+        if(unNombre == 'fac5'){
+            return this.comunication.sendJson(this.operation.graficoFacundo5());
+        }
+
+        if(unNombre == 'fac6'){
+            return this.comunication.sendJson(this.operation.graficoFacundo6());
+        }
+
+        if(unNombre == 'fac7'){
+            return this.comunication.sendJson(this.operation.graficoFacundo7());
+        }
+
         let fieldData;
         if(unNombre == 'tc'){
             fieldData = new FieldData('Tc', this.operation.getRandomInt(2, 233).toString());
