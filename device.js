@@ -137,6 +137,18 @@ export class Device {
             return;
         }
 
+        if(unNombre == 'isc'){
+            fieldData = new FieldData('Isc', this.operation.getRandomInt(0, 1200).toString());
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+
+        if(unNombre == 'pm'){
+            fieldData = new FieldData('Pm', this.operation.getRandomInt(0, 10000).toString());
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+
 
         this.nameGrafic = unNombre;
     }
@@ -187,6 +199,13 @@ export class Device {
                 else{
                     fieldData = new FieldData('Sens', "pt1000");  
                 }
+                this.comunication.sendJson(fieldData);
+
+
+                fieldData = new FieldData('Isc', this.operation.getRandomInt(0, 1200).toString());
+                this.comunication.sendJson(fieldData);
+
+                fieldData = new FieldData('Pm', this.operation.getRandomInt(0, 10000).toString());
                 this.comunication.sendJson(fieldData);
 
             }, 300);
