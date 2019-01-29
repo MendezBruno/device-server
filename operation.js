@@ -1,5 +1,6 @@
-import Punto from './comunication-object/point'
+
 import { ChartData } from './comunication-object/chartData';
+import {FieldData} from './comunication-object/fieldData'
 
 export class Operation {
 
@@ -105,6 +106,11 @@ export class Operation {
                             0.157,0.150,0.145,0.141,0.134,0.128,0.123,0.118,0.115,0.111,0.106,0.104,0.097,
                             0.095,0.092,0.089,0.086,0.000]);
 
+    
+    dataAssemble.addField(new FieldData('Isc', this.getRandomInt(0, 1200).toString()));
+    dataAssemble.addField(new FieldData('Pm', this.getRandomInt(0, 10000).toString()));
+    dataAssemble.addField(new FieldData('Vocg', this.getRandomInt(0, 10000).toString()));
+
     return dataAssemble;
   }
 
@@ -149,6 +155,10 @@ export class Operation {
                             0.152,0.148,0.145,0.141,0.137,0.133,0.131,0.125,0.123,0.119,0.117,0.115,0.111,
                             0.109,0.108,0.104,0.102,0.000]);
 
+    dataAssemble.addField(new FieldData('Isc', this.getRandomInt(0, 1200).toString()));
+    dataAssemble.addField(new FieldData('Pm', this.getRandomInt(0, 10000).toString()));
+    dataAssemble.addField(new FieldData('Vocg', this.getRandomInt(0, 10000).toString()));
+
     return dataAssemble;
   }
 
@@ -190,6 +200,11 @@ export class Operation {
                             0.154,0.151,0.147,0.144,0.141,0.136,0.133,0.130,0.126,0.124,0.121,0.118,0.115,0.114,
                             0.110,0.110,0.107,0.000]);
 
+
+    dataAssemble.addField(new FieldData('Isc', this.getRandomInt(0, 1200).toString()));
+    dataAssemble.addField(new FieldData('Pm', this.getRandomInt(0, 10000).toString()));
+    dataAssemble.addField(new FieldData('Vocg', this.getRandomInt(0, 10000).toString()));
+
     return dataAssemble;
   }
 
@@ -230,6 +245,10 @@ export class Operation {
                             0.362,0.352,0.343,0.334,0.326,0.315,0.307,0.299,0.291,0.282,0.276,0.270,0.261,0.254,
                             0.247,0.242,0.236,0.000]);
 
+    dataAssemble.addField(new FieldData('Isc', this.getRandomInt(0, 1200).toString()));
+    dataAssemble.addField(new FieldData('Pm', this.getRandomInt(0, 10000).toString()));
+    dataAssemble.addField(new FieldData('Vocg', this.getRandomInt(0, 10000).toString()));
+
     return dataAssemble;
   }
 
@@ -269,6 +288,10 @@ export class Operation {
                             0.500,0.486,0.472,0.457,0.445,0.433,0.421,0.409,0.398,0.386,0.376,0.366,0.355,0.347,
                             0.338,0.330,0.321,0.313,0.305,0.297,0.291,0.283,0.275,0.268,0.263,0.255,0.250,0.243,
                             0.238,0.232,0.227,0.000]);
+
+    dataAssemble.addField(new FieldData('Isc', this.getRandomInt(0, 1200).toString()));
+    dataAssemble.addField(new FieldData('Pm', this.getRandomInt(0, 10000).toString()));
+    dataAssemble.addField(new FieldData('Vocg', this.getRandomInt(0, 10000).toString()));
 
     return dataAssemble;
   }
@@ -311,6 +334,10 @@ export class Operation {
                             0.348,0.342,0.333,0.324,0.316,0.309,0.302,0.297,0.288,0.281,0.279,0.270,0.264,0.258,
                             0.255,0.248,0.242,0.237]);
 
+    dataAssemble.addField(new FieldData('Isc', this.getRandomInt(0, 1200).toString()));
+    dataAssemble.addField(new FieldData('Pm', this.getRandomInt(0, 10000).toString()));
+    dataAssemble.addField(new FieldData('Vocg', this.getRandomInt(0, 10000).toString()));
+
     return dataAssemble;
   }
 
@@ -351,6 +378,10 @@ export class Operation {
                             0.471,0.459,0.446,0.433,0.421,0.411,0.398,0.387,0.379,0.366,0.357,0.347,0.337,0.331,
                             0.322,0.313,0.305,0.298,0.290,0.282,0.276,0.268,0.261,0.254,0.250,0.242,0.238,0.232,
                             0.226,0.221,0.217,0.211]);
+
+    dataAssemble.addField(new FieldData('Isc', this.getRandomInt(0, 1200).toString()));
+    dataAssemble.addField(new FieldData('Pm', this.getRandomInt(0, 10000).toString()));
+    dataAssemble.addField(new FieldData('Vocg', this.getRandomInt(0, 10000).toString()));
 
     return dataAssemble;
   }

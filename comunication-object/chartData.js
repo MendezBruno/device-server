@@ -1,20 +1,27 @@
-import { Punto } from "./point";
-import { runInThisContext } from "vm";
+import { FieldData } from "./fieldData";
 
 export class ChartData {
 
     t;
-    cn;
     p;
+    f;
 
     /**
     * @param {string} chartName 
     * @param {Array of Point} points 
     */
     constructor(chartName,points) {
-        this.cn = chartName;
+        this.addField(new FieldData("Name", chartName));
         this.p = points;
         this.t = "CD";
+    }
+
+    addField(fieldData){
+        if(this.f === undefined || this.f === null){
+            this.f = [];
+        }
+
+        this.f.push(fieldData);
     }
 
     checkIfPointsAreAreated(){

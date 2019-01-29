@@ -149,6 +149,12 @@ export class Device {
             return;
         }
 
+        if(unNombre == 'vocg'){
+            fieldData = new FieldData('Vocg', this.operation.getRandomInt(0, 10000).toString());
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+
 
         this.nameGrafic = unNombre;
     }
@@ -206,6 +212,9 @@ export class Device {
                 this.comunication.sendJson(fieldData);
 
                 fieldData = new FieldData('Pm', this.operation.getRandomInt(0, 10000).toString());
+                this.comunication.sendJson(fieldData);
+
+                fieldData = new FieldData('Vocg', this.operation.getRandomInt(0, 10000).toString());
                 this.comunication.sendJson(fieldData);
 
             }, 300);
