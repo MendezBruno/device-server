@@ -155,6 +155,17 @@ export class Device {
             return;
         }
 
+        if(unNombre == 'error'){
+            fieldData = new FieldData('Error', this.operation.getErrorMessage());
+            this.comunication.sendJson(fieldData);
+            return;
+        }
+
+        if(unNombre == 'gs'){
+            fieldData = new FieldData('Gs', "Saved");
+            this.comunication.sendJson(fieldData);
+            return;
+        }
 
         this.nameGrafic = unNombre;
     }

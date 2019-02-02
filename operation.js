@@ -4,6 +4,44 @@ import {FieldData} from './comunication-object/fieldData'
 
 export class Operation {
 
+  getErrorMessage(){
+
+    let desicion = this.getRandomInt(1, 6);
+
+    if(desicion == 1)
+    {
+      return "Error Inicialización SD";
+    }
+
+    if(desicion == 2)
+    {
+      return "Límite de curvas con el mismo nombre";
+    }
+
+    if(desicion == 3)
+    {
+      return "No se detecta tensión";
+    }
+      
+    if(desicion == 4)
+    {
+      return "Corriente baja o cables de corriente no conectados";
+    }
+
+    if(desicion == 5)
+    {
+      return "Atención: Tensión de generador superior a 1000V";
+    }
+    
+    if(desicion == 6)
+    {
+      return "Ajustando tiempo de medida";
+    }
+    
+    return "Sos un gil";
+
+  }
+
   getSinGrafics(){
     var seno = new ChartData("SENO", []);
     var amplitud = this.getRandomInt(1, 10);
@@ -66,6 +104,9 @@ export class Operation {
     return dataAssemble;
   }
 
+  /**
+   * A este método vamos a agregarle el fieldData que prueba el objeto Gs(GraphisStatus)
+   */
   graficoFacundo(){
 
     let dataAssemble = new ChartData("GRAFICO_FACUNDO", []);
@@ -110,6 +151,7 @@ export class Operation {
     dataAssemble.addField(new FieldData('Isc', this.getRandomInt(0, 1200).toString()));
     dataAssemble.addField(new FieldData('Pm', this.getRandomInt(0, 10000).toString()));
     dataAssemble.addField(new FieldData('Vocg', this.getRandomInt(0, 10000).toString()));
+    dataAssemble.addField(new FieldData('Gs', "Saved"));
 
     return dataAssemble;
   }
