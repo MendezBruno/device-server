@@ -47,7 +47,9 @@ export class Device {
 
             if(objectReal.cn == "updateChart"){
                 let chartData = this.operation.assembleRandomData(this.nameGrafic);
-                this.comunication.sendJson(chartData);
+                setTimeout(() => {
+                    this.comunication.sendJson(chartData);
+                  }, this.operation.getRandomInt(0, 10000));             
             }
 
             if(objectReal.cn == "updateName"){
