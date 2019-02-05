@@ -72,6 +72,10 @@ export class Device {
             return this.comunication.sendJson(this.operation.graficoFacundo());
         }
 
+        if(unNombre == 'cem'){
+            return this.comunication.sendJson(this.operation.graficoFacundoCEM());
+        }
+
         if(unNombre == 'fac2'){
             return this.comunication.sendJson(this.operation.graficoFacundo2());
         }
