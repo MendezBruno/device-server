@@ -72,6 +72,18 @@ export class Device {
             return this.comunication.sendJson(this.operation.graficoFacundo());
         }
 
+        if(unNombre == 'faccem'){
+            this.comunication.sendJson(this.operation.graficoFacundo());
+            //Usamos el 2 porque tiene los valores mas grandes
+            return this.comunication.sendJson(this.operation.graficoFacundoCEM2());
+        }
+
+        if(unNombre == 'fac2cem'){
+            //Usamos el 2 porque tiene los valores mas grandes
+            this.comunication.sendJson(this.operation.graficoFacundoCEM2());
+            return this.comunication.sendJson(this.operation.graficoFacundo());
+        }
+
         if(unNombre == 'cem'){
             return this.comunication.sendJson(this.operation.graficoFacundoCEM());
         }
