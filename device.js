@@ -139,7 +139,7 @@ export class Device {
             return;
         }
         if(unNombre == 'hr'){
-            fieldData = new FieldData('Hr', Math.round((new Date()).getTime() / 1000));
+            fieldData = new FieldData('Hr', Math.round((new Date().getTime() / 1000) - (3 * 3600)));
             this.comunication.sendJson(fieldData);
             return;
         }
