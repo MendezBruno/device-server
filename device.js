@@ -2,6 +2,7 @@ import  { Operation } from './operation';
 import { ComunicationService } from './comunication';
 import {FieldData} from './comunication-object/fieldData';
 import { Command } from './comunication-object/command';
+import {ComunicationServiceIO} from './comunicationIO';
 
 export class Device {
 
@@ -13,7 +14,8 @@ export class Device {
     constructor(name, port) {
         this.name = name;
         //TODO. revisar esta logica de referencia doble, por el momento pasamos por parametro el device para poder ejecutar comandos de llegada
-        this.comunication = new ComunicationService(port, this);
+        //this.comunication = new ComunicationService(port, this);
+        this.comunication = new ComunicationServiceIO(port, this);
         this.operation = new Operation();
     }
 
